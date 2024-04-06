@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Grid, Button, Title, TextInput } from '@mantine/core';
 import TodoItem from '../TodoItem/TodoItem';
+import { ColorSchemeToggle } from '@/components/ColorSchemeToggle/ColorSchemeToggle';
 
 interface Todo {
     id: number;
@@ -11,7 +12,7 @@ interface Todo {
     isEditing: boolean;
 }
 
-function TodoList() {
+function TodoCanvas() {
     const [todos, setTodos] = useState<Todo[]>([]);
 
     const addTodo = () => {
@@ -44,6 +45,7 @@ function TodoList() {
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 40 }}>
                 <Title>TodoForest</Title>
+                <ColorSchemeToggle />
                 <Button onClick={addTodo}>New Item</Button>
             </div>
             <Grid>
@@ -64,4 +66,4 @@ function TodoList() {
     );
 }
 
-export default TodoList;
+export default TodoCanvas;
