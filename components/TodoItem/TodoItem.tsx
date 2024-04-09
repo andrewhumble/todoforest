@@ -1,23 +1,23 @@
 import { Checkbox, Group, Text, Textarea, ActionIcon } from '@mantine/core';
 import { IconCirclePlus, IconMinus } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
-import { Draggable } from '@hello-pangea/dnd';
 
 interface Todo {
-    id: number;
+    id: string;
     text: string;
     completed: boolean;
-    parentId?: number;
+    parentId?: string;
+    isEditing: boolean;
 }
 
 interface TodoItemProps {
     todo: Todo;
-    onChange: (id: number) => void;
-    onDelete: (id: number) => void;
-    onUpdate: (id: number, text: string) => void;
-    onAddChild: (id: number) => void;
+    onChange: (id: string) => void;
+    onDelete: (id: string) => void;
+    onUpdate: (id: string, text: string) => void;
+    onAddChild: (id: string) => void;
     isEditing?: boolean;
-    onSave?: (id: number, text: string) => void;
+    onSave?: (id: string, text: string) => void;
     index: number;
 }
 
