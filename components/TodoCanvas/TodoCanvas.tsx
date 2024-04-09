@@ -18,9 +18,9 @@ interface Todo {
 function TodoCanvas() {
     const [todos, setTodos] = useState<Todo[]>([]);
 
-    const addTodo = (parentId?: number) => {
+    const addTodo = (parentId?: string) => {
         const newTodo: Todo = { id: generateNewId(), text: '', completed: false, isEditing: true };
-    
+
         if (typeof parentId === 'undefined') {
             // Add a root-level todo
             setTodos([...todos, newTodo]);
@@ -37,7 +37,7 @@ function TodoCanvas() {
                 return todo;
             }));
         }
-    };    
+    };
 
     const saveTodo = (id: string, newText: string) => {
         setTodos(todos.map(todo => {
@@ -78,9 +78,8 @@ function TodoCanvas() {
                 <Button onClick={() => addTodo(undefined)}>New Item</Button>
             </div>
             <Grid>
-                {todos.map(todo => (
+                {todos.map((todo, index) => (
                     <Grid.Col key={todo.id} span={4}>
-                        {todos.map((todo, index) => (
                             <TodoItem
                                 key={todo.id}
                                 todo={todo}
@@ -90,9 +89,7 @@ function TodoCanvas() {
                                 onSave={saveTodo}
                                 onUpdate={() => toggleEdit(todo.id)}
                                 isEditing={todo.isEditing}
-                                index={index}
                             />
-                        ))}
                     </Grid.Col>
                 ))}
             </Grid>

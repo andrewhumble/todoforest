@@ -18,10 +18,9 @@ interface TodoItemProps {
     onAddChild: (id: string) => void;
     isEditing?: boolean;
     onSave?: (id: string, text: string) => void;
-    index: number;
 }
 
-function TodoItem({ todo, onChange, onDelete, onUpdate, isEditing: isEditingProp = false, onSave, index }: TodoItemProps) {
+function TodoItem({ todo, onAddChild, onChange, onDelete, onUpdate, isEditing: isEditingProp = false, onSave }: TodoItemProps) {
     const [isEditing, setIsEditing] = useState(isEditingProp);
     const [editText, setEditText] = useState(todo.text);
 
@@ -50,7 +49,7 @@ function TodoItem({ todo, onChange, onDelete, onUpdate, isEditing: isEditingProp
     };
 
     const handleAddChild = () => {
-        // Here, you would ideally call a function passed down from the parent component to add a new child todo.
+        onAddChild(todo.id);
     };
 
     return (
