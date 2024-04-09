@@ -1,11 +1,13 @@
 import { Checkbox, Group, Text, Textarea, ActionIcon } from '@mantine/core';
-import { IconMinus } from '@tabler/icons-react';
+import { IconCirclePlus, IconMinus } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
+import { Draggable } from '@hello-pangea/dnd';
 
 interface Todo {
     id: number;
     text: string;
     completed: boolean;
+    parentId?: number;
 }
 
 interface TodoItemProps {
@@ -13,11 +15,13 @@ interface TodoItemProps {
     onChange: (id: number) => void;
     onDelete: (id: number) => void;
     onUpdate: (id: number, text: string) => void;
+    onAddChild: (id: number) => void;
     isEditing?: boolean;
     onSave?: (id: number, text: string) => void;
+    index: number;
 }
 
-function TodoItem({ todo, onChange, onDelete, onUpdate, isEditing: isEditingProp = false, onSave }: TodoItemProps) {
+function TodoItem({ todo, onChange, onDelete, onUpdate, isEditing: isEditingProp = false, onSave, index }: TodoItemProps) {
     const [isEditing, setIsEditing] = useState(isEditingProp);
     const [editText, setEditText] = useState(todo.text);
 
@@ -43,6 +47,10 @@ function TodoItem({ todo, onChange, onDelete, onUpdate, isEditing: isEditingProp
             event.preventDefault();
             handleUpdate();
         }
+    };
+
+    const handleAddChild = () => {
+        // Here, you would ideally call a function passed down from the parent component to add a new child todo.
     };
 
     return (
@@ -76,6 +84,9 @@ function TodoItem({ todo, onChange, onDelete, onUpdate, isEditing: isEditingProp
                     <IconMinus size={16} />
                 </ActionIcon>
             </Group>
+            <ActionIcon variant="subtle" onClick={handleAddChild} style={{ position: 'absolute', bottom: '-30px', left: '50%', transform: 'translateX(-50%)' }}>
+                <IconCirclePlus size={18} />
+            </ActionIcon>
         </div>
     );
 }
