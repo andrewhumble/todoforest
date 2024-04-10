@@ -5,7 +5,7 @@ import TodoCanvas from '../components/TodoCanvas/TodoCanvas'; // Ensure the path
 export default function HomePage() {
 
   return (
-    <Container size="md">
+    <Container size="lg">
       <Space h="lg" />
       <TodoCanvas />
     </Container>

@@ -1,5 +1,5 @@
-import { Checkbox, Group, Text, Textarea, ActionIcon } from '@mantine/core';
-import { IconCirclePlus, IconMinus } from '@tabler/icons-react';
+import { Checkbox, Group, Text, Textarea, ActionIcon, Grid } from '@mantine/core';
+import { IconPlus, IconMinus } from '@tabler/icons-react';
 import { useState, useEffect } from 'react';
 
 interface Todo {
@@ -53,8 +53,8 @@ function TodoItem({ todo, onAddChild, onChange, onDelete, onUpdate, isEditing: i
     };
 
     return (
-        <div style={{ position: 'relative', border: '1px solid #555555', padding: '15px', borderRadius: '5px', backgroundColor: '#2E2E2E', width: '100%' }}>
-            <Group align="center" style={{ width: '100%', justifyContent: 'space-between', display: 'flex' }}>
+        <div style={{ position: 'relative', border: '1px solid #555555', padding: '15px', marginTop: '40px', borderRadius: '5px', backgroundColor: '#2E2E2E', width: '100%', maxWidth: '300px' }}>
+            <Group justify="center" align="center" style={{ width: '100%', justifyContent: 'space-between', display: 'flex' }}>
                 <Checkbox
                     checked={todo.completed}
                     onChange={() => onChange(todo.id)}
@@ -79,13 +79,13 @@ function TodoItem({ todo, onAddChild, onChange, onDelete, onUpdate, isEditing: i
                     )}
                 </div>
 
-                <ActionIcon variant="subtle" onClick={() => onDelete(todo.id)} style={{ flexShrink: 0 }}>
+                <ActionIcon variant="subtle" onClick={() => onDelete(todo.id)}>
                     <IconMinus size={16} />
                 </ActionIcon>
+                <ActionIcon variant="subtle" onClick={handleAddChild}>
+                    <IconPlus size={16} />
+                </ActionIcon>
             </Group>
-            <ActionIcon variant="subtle" onClick={handleAddChild} style={{ position: 'absolute', bottom: '-30px', left: '50%', transform: 'translateX(-50%)' }}>
-                <IconCirclePlus size={18} />
-            </ActionIcon>
         </div>
     );
 }
